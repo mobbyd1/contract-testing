@@ -2,14 +2,18 @@ import createError from 'http-errors'
 import express from 'express'
 import logger from 'morgan'
 
+import swaggerUi from 'swagger-ui-express'
+
 import indexRouter from './routes/index'
+import apiDocs from './swagger/api-test.json'
 
 var app = express()
-
 
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs));
 
 app.use('/', indexRouter)
 
@@ -29,7 +33,7 @@ app.use((err, req, res, next) => {
   res.send('error')
 })
 
-app.listen(process.env.PORT, () =>
-  console.log(`Example app listening on port ${process.env.PORT}!`)
+app.listen(8080, () =>
+  console.log(`Example app listening on port 8080!`)
 )
 

@@ -1,0 +1,46 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is a simple API",
+      "version": "1.0.0",
+      "title": "Teste simples de validação API"
+    },
+    "host": "localhost:8080",
+    "schemes": [ "http" ],
+    "paths": {
+      "/videos" : {
+        "get": {
+          "summary": "searches videos",
+          "operationId": "searchVideos",
+          "produces": [ "application/json; charset=utf-8" ],
+          "responses": {
+            "200": {
+              "description": "search results matching criteria",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Video"
+                }
+              }
+            },
+            "400": {
+              "description": "bad input parameter"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Video": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+					"id": {
+						"type": "string",
+						"format": "uuid",
+						"example": "d290f1ee-6c54-4b01-90e6-d701748f0851"
+					}
+        }
+      }
+    }
+  }
