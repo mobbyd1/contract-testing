@@ -1,0 +1,81 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.3.0",
+    "title": "Users",
+    "description": "User management API"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/videos": {
+      "get": {
+        "description": "Get videos",
+        "operationId": "getVideos",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1,
+              "example": 1
+            },
+            "required": false
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": 24,
+              "example": 24
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Videos were obtained",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Videos"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Video": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "User identification number",
+            "example": 1234
+          }
+        }
+      },
+      "Videos": {
+        "type": "object",
+        "properties": {
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Video"
+            }
+          }
+        }
+      }
+    }
+  }
+}
